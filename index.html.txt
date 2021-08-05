@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="description" content="My personal website" />
+  <meta charset="utf-8">
+  <title>Kelvin's Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="Kelvin Mock" content="">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+
+<body>
+
+<h1>This is Kelvin Mock's website.</h1>
+<p>Feel free to take a look here :)</p>
+  
+<div class="container">
+  
+</div>
+
+<script>
+</script>
+
+</body>
+</html>
