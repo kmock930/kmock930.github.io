@@ -8,10 +8,9 @@ export default function Home() {
           <title>Kelvin's Site</title>
       </head>
 
-      <body>
-          <h1>Welcome to Kelvin Mock's Website!</h1>
-          <p>Feel free to have a look:) Wow&nbsp&nbspWowww!!!</p>
-      </body>
+      <h1>Welcome to Kelvin Mock's Website!</h1>
+      <p>Feel free to have a look:) </p>
+      <p>Wow&nbsp&nbspWowww!!!</p>
     </div>
   )
 }
