@@ -1,5 +1,5 @@
 # kmock930.github.io
-My Personal Website: kmock930.github.io
+My Personal Website: http://kelvmock930.com/
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
