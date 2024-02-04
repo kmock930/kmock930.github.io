@@ -1,4 +1,37 @@
 .NavBar {
-    position: "centre";
-    height: 100%
+    position: "fixed";
+    background-color: cyan;
+    color:purple;
+    top: 60px;
+}
+
+.iconLogo {
+    display: none; /* Default display value */
+    
+    /* Media query for medium-sized screens and larger (md and above) */
+    @media (min-width: 768px) {
+        display: flex;
+    }
+
+    margin-right: 1px; /* Adjust the margin value according to your design */
+}
+
+.headerText {
+    margin-right: 2px;
+    display: none; /* Default display value */
+
+    /* Media query for medium-sized screens and larger (md and above) */
+    @media (min-width: 768px) {
+        display: flex;
+    }
+
+    font-family: monospace;
+    font-weight: 700;
+    letter-spacing: 0.3rem;
+    color: inherit;
+    text-decoration: none;
+}
+
+.btn {
+    width: 30%;
 }

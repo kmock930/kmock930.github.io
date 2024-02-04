@@ -1,74 +1,40 @@
-"use client";
+'use client'
 
-import { AppBar, CssBaseline, Grid, Menu, Toolbar,  Button, MenuItem} from "@mui/material";
-import styles from '../styles/navbar.module.css';
-import { useState } from "react";
+import { AppBar, Menu, Button, Container, MenuItem, Toolbar } from '@mui/material';
+import { useState } from 'react';
+import AdbIcon from '@mui/icons-material/Adb';
+const navbarStyles = require('../styles/navbar.module.css');
+import '../content/navbarParser';
+import { navbarParser } from '../content/navbarParser';
+const topBar = require('../content/navMenu.json');
 
-export default function NavBar(props) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+export default function NavBar() {
+  const parser = new navbarParser(topBar);
+  const firstLayer = parser.getFirstLayer();
+
+  const handleClick = (btnText) => {
+    console.log(btnText);
+  }
 
   return (
-    <AppBar position="static" style={{background: "#FFA700"}}>
-      <CssBaseline/>
-      <Grid>
-        <center>
-          <h2>
-            {"Welcome to Kelvin's Site :)"}
-          </h2>
-        </center>
-      </Grid>
-      <Grid>
-        <center>
-          <Toolbar>
-            <Button
-              id="basic-button"
-              aria-controls={open ? 'basic-menu' : undefined}
-              aria-label="Dashboard button"
-              aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
-              onClick={handleClick}
-              color="secondary"
-              sx={{
-                fontWeight: "bold"
-              }}
-            >
-              Dashboard
-            </Button>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'basic-button',
-              }}
-            >
-              <MenuItem 
-                onClick={handleClose}
-              >
-                Profile
-              </MenuItem>
-              <MenuItem 
-                onClick={handleClose}
-              >
-                My account
-              </MenuItem>
-              <MenuItem 
-                onClick={handleClose}
-              >
-                Logout
-              </MenuItem>
-            </Menu>
-          </Toolbar>
-        </center>
-      </Grid>
+    <AppBar className={navbarStyles.NavBar}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <AdbIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
+
+          {firstLayer.map((item) => {
+            return (
+                <Button 
+                  key={item}
+                  className={navbarStyles.btn}
+                  onClick={handleClick(item)}
+                >
+                  {item}
+                </Button>
+            )
+          })}
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 }

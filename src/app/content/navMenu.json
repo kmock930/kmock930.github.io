@@ -1,0 +1,18 @@
+[
+    {
+        "Home": [
+            "Welcoming", 
+            "About Me", 
+            "My Professional Self"
+        ]
+    },
+    {
+        "Albums": [
+            {"Childhood": ["School", "Family"]}, 
+            {"Travel": ["Taipei", "Vancouver"]},
+            {"Uni Life in UK": ["Coventry", "Royal Holloway"]},
+            {"Life in Canada": ["Work", "Social", "Living"]}
+        ]
+    },
+    "Contact Me"
+]
