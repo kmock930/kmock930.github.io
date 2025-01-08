@@ -1,5 +1,5 @@
 # kmock930.github.io
-My Personal Website: http://kelvmock930.com/
+My Personal Website: [kmock930-github-io.vercel.app](https://kmock930-github-io.vercel.app/)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -35,5 +35,8 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Then, run npm run build to build your application.
+After getting the npm build, run npx serve ./out, to create/update index.html for deployment.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
