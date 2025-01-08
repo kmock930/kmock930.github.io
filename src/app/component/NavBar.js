@@ -1,17 +1,32 @@
 'use client'
 
 import { AppBar, Menu, Button, Container, Toolbar } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { CircularProgress } from '@mui/material';
 import AdbIcon from '@mui/icons-material/Adb';
 const navbarStyles = require('../styles/navbar.module.css');
 const { NavbarParser } = require('../content/navbarParser');
-const topBar = require('../content/navMenu.json');
+import "../mirage/navigation";
 
 export default function NavBar() {
-  const parser = new NavbarParser(topBar);
-  const firstLayer = parser.getFirstLayer();
+  const [navbarLoading, setNavbarLoading] = useState(true);
+  const [parser, setParser] = useState(null);
+  const [firstLayer, setFirstLayer] = useState([]);
   const [expandedPaths, setExpandedPaths] = useState([]);
   const [anchorEls, setAnchorEls] = useState({});
+  const [topBar, setTopBar] = useState([]);
+
+  useEffect(() => {
+    fetch("/topbar")
+      .then(response => response.json())
+      .then(data => {
+        setTopBar(data);
+        const newParser = new NavbarParser(data);
+        setParser(newParser);
+        setFirstLayer(newParser.getFirstLayer());
+      })
+      .then(() => setNavbarLoading(false));
+  }, []);
 
   const renderMenu = (menuItems, path = []) => {
     return menuItems.map((menuItem, index) => {
@@ -87,18 +102,18 @@ export default function NavBar() {
     toggleMenu(path, items);
   };
   
-
   const handleClose = () => {
     setExpandedPaths([]);
     setAnchorEls({});
   };  
 
   return (
+    navbarLoading ? <><center><CircularProgress className={navbarStyles.NavBarLoading} /> </center></> :
     <AppBar className={navbarStyles.NavBar}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { md: 'flex' }, mr: 1 }} />
-          {renderMenu(firstLayer.map(item => ({ [item]: parser.getItemListFrom(item) })))}
+          {firstLayer.length > 0 && renderMenu(firstLayer.map(item => ({ [item]: parser.getItemListFrom(item) })))}
         </Toolbar>
       </Container>
     </AppBar>
