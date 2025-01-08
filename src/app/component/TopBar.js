@@ -1,4 +1,7 @@
-import { AppBar, Button } from "@mui/material";
+'use client'
+
+import React from 'react'
+import { AppBar } from "@mui/material";
 import topBarStyles from '../styles/topBar.module.css'
 export default function TopBar(props) {
     return (
