@@ -1,8 +1,16 @@
 class NavbarParser {
+    /**
+     * Passes an array to this instance.
+     * @param {Array<String>} topBar 
+     */
     constructor(topBar) {
         this.topBar = topBar;
     }
 
+    /**
+     * Returns the first layer of an array passed to this instance.
+     * @returns {Array<String>}
+     */
     getFirstLayer = () => {
         let keyList = [];
         this.topBar.map((item) => {
@@ -18,65 +26,36 @@ class NavbarParser {
 
     /**
      * 
-     * @param {Array[string]} clickPath 
-     * @returns Array
+     * @param {Array<String> | String} clickPath 
+     * @param {Array} currList
+     * @returns {Array} - an array of the contents under the provided path and level
      */
-    getItemListFrom = (clickPath) => {
-        if (Array.isArray(clickPath)) {
-            //main logic
-            let currLayer = this.getFirstLayer();
-            let resItemsList = this.topBar;
-            //loop
-            clickPath.map((item, ind) => {
-                if (typeof(item) !== 'string') {
-                    return []; //not found
-                }
-                
-                //traverse to each item until reached target
-                if (currLayer.includes(item)) {
-                    resItemsList = resItemsList[currLayer.indexOf(item)];
-                    if (typeof(resItemsList) === 'object' && !Array.isArray(resItemsList)) {
-                        resItemsList = resItemsList[item];
-                    }
-                    if (typeof(resItemsList) === 'string') {
-                        return []; //a string does not have lower layer values to go down to
-                    }
+    getItemListFrom = (clickPath, currList=this.topBar) => {
+        let result = currList;
 
-                    //resItemList is an actual Array[string]
-                    currLayer = [];
-                    resItemsList.map((subItem, subInd) => {
-                        if (typeof(subItem) === 'object') {
-                            if (Array.isArray(subItem)) {
-                                //subItem is an Array -> get first element as the "key"
-                                currLayer.push(subItem[0]);
-                            } else {
-                                //subItem is an object
-                                currLayer = currLayer.concat(Object.keys(resItemsList));
-                            }
-                        } else {
-                            //subItem is a string
-                            currLayer.push(subItem);
-                            
-                        }
-                    });
+        // Support string or array paths
+        const path = Array.isArray(clickPath) ? clickPath : [clickPath];
+    
+        for (const key of path) {
+            if (Array.isArray(result)) {
+                // Search within an array for an object with the key
+                const found = result.find(item => 
+                    typeof item === 'object' && key in item
+                );
+                if (found) {
+                    result = found[key]; // Move into the object by key
+                } else {
+                    return []; // Key not found
                 }
-            })
-        }
-
-        if (typeof(clickPath) === 'string') {
-            //find the click item from possible click paths
-            if (this.getFirstLayer().includes(clickPath)) {
-                return target;
+            } else if (typeof result === 'object' && result !== null) {
+                // Traverse into object directly
+                result = result[key] || [];
+            } else {
+                return []; // Invalid path
             }
         }
-
-        //other invalid types (DO NOT handle json object type)
-        return [];
+        return result;
     };
-    
-    #getResList() {
-
-    }
-}
+};
 
 module.exports.NavbarParser = NavbarParser;

@@ -3,7 +3,7 @@
         "Home": [
             "Welcoming", 
             "About Me", 
-            "My Professional Self"
+            {"My Professional Self": ["Resume", "Projects", "Education", "Work Experience", "Skills"]}
         ]
     },
     {

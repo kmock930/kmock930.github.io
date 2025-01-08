@@ -3,12 +3,18 @@ const sampleParam = require('./navBar_param.json');
 const realParam = require('../src/app/content/navMenu.json');
 const expectedRes = require('../__test__/navBar_expect_result.json');
 
-const parser_real = new NavbarParser(realParam);
-
 describe('Happy Flows', () => {
-    it('Real Case - get first layer', () => {
+    const parser_real = new NavbarParser(realParam);
+    it('Get first layer', () => {
         const firstLayer = parser_real.getFirstLayer();
         expect(Array.isArray(firstLayer)).toBeTruthy();
         expect(firstLayer).toEqual(expectedRes[0]);
+    });
+
+    it('Get contents from the first layer', () => {
+        const clickPath = "Home";
+        const resItemList = parser_real.getItemListFrom(clickPath);
+        expect(Array.isArray(resItemList)).toBeTruthy();
+        expect(resItemList).toEqual(expectedRes[1]);
     })
 })
