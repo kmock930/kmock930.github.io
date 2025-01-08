@@ -1,7 +1,6 @@
 import NavBar from './component/NavBar'
 import React from 'react'
 import TopBar from './component/TopBar';
-import MainBody from './component/MainBody';
 
 export default function Home() {
   return (
