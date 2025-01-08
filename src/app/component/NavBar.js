@@ -30,7 +30,7 @@ export default function NavBar() {
           : menuItem;
       
       return (
-        <div key={index}>
+        <span key={index}>
           <Button onClick={(event) => handleClick(currentPath, subMenuItems, event.currentTarget)} ref={el => {
             if (el && el.offsetParent !== null && anchorEls[currentPath.join('-')] !== el) {
               setAnchorEls(prev => ({ ...prev, [currentPath.join('-')]: el }));
@@ -56,7 +56,7 @@ export default function NavBar() {
               {renderMenu(subMenuItems, currentPath)}
             </Menu>
           )}
-        </div>
+        </span>
       );
     });
   };
@@ -77,7 +77,7 @@ export default function NavBar() {
         return [...prevPaths, path];
       } else {
         // Close the menu if no submenu exists
-        return []; // No change if no submenu exists
+        return [];
       }
     });
   };
