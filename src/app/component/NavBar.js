@@ -1,7 +1,7 @@
 'use client'
 
-import { AppBar, Menu, Button, Container, MenuItem, Toolbar } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { AppBar, Menu, Button, Container, Toolbar } from '@mui/material';
+import { useState } from 'react';
 import AdbIcon from '@mui/icons-material/Adb';
 const navbarStyles = require('../styles/navbar.module.css');
 const { NavbarParser } = require('../content/navbarParser');
@@ -77,10 +77,8 @@ export default function NavBar() {
         return [...prevPaths, path];
       } else {
         // Close the menu if no submenu exists
-        return [];
+        return []; // No change if no submenu exists
       }
-
-      return prevPaths; // No change if no submenu exists
     });
   };
 
