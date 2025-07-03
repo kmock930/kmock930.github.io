@@ -7,6 +7,15 @@
         ]
     },
     {
+        "Security": [
+            "Overview",
+            {"API Security": ["Authentication", "Authorization", "Rate Limiting", "Input Validation"]},
+            {"HTTPS Implementation": ["SSL/TLS Setup", "Certificate Management", "Security Headers"]},
+            {"Data Sanitization": ["Input Sanitization", "Output Encoding", "XSS Prevention"]},
+            {"Best Practices": ["Secure Coding", "Security Testing", "Common Vulnerabilities"]}
+        ]
+    },
+    {
         "Albums": [
             {"Childhood": ["School", "Family"]}, 
             {"Travel": ["Taipei", "Vancouver"]},
