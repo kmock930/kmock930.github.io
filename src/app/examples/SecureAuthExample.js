@@ -11,9 +11,6 @@
 'use client'
 
 import React, { useState } from 'react'
-import { sanitizeInput, validate } from '../../lib/sanitize'
-import { useSecureRequest } from '../../lib/apiClient'
-import { handleClientError } from '../../lib/errorHandler'
 import { 
   TextField, 
   Button, 
@@ -28,6 +25,44 @@ import {
 } from '@mui/material'
 import { Visibility, VisibilityOff, Security, Info } from '@mui/icons-material'
 
+// Simplified validation functions for demo
+const sanitizeInput = {
+  text: (input) => {
+    if (typeof input !== 'string') return ''
+    return input.replace(/[<>]/g, '').trim().substring(0, 50)
+  },
+  email: (input) => {
+    if (typeof input !== 'string') return null
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const sanitized = input.toLowerCase().trim()
+    return emailRegex.test(sanitized) ? sanitized : null
+  }
+}
+
+const validate = {
+  text: (text, minLength = 1, maxLength = 1000) => {
+    if (typeof text !== 'string') return false
+    return text.length >= minLength && text.length <= maxLength
+  },
+  email: (email) => {
+    return sanitizeInput.email(email) !== null
+  },
+  password: (password) => {
+    const result = { isValid: false, errors: [] }
+    if (typeof password !== 'string') {
+      result.errors.push('Password must be a string')
+      return result
+    }
+    if (password.length < 8) result.errors.push('Password must be at least 8 characters long')
+    if (!/[a-z]/.test(password)) result.errors.push('Password must contain at least one lowercase letter')
+    if (!/[A-Z]/.test(password)) result.errors.push('Password must contain at least one uppercase letter')
+    if (!/\d/.test(password)) result.errors.push('Password must contain at least one number')
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) result.errors.push('Password must contain at least one special character')
+    result.isValid = result.errors.length === 0
+    return result
+  }
+}
+
 export default function SecureAuthExample() {
   const [mode, setMode] = useState('login') // 'login' or 'register'
   const [showPassword, setShowPassword] = useState(false)
@@ -39,7 +74,23 @@ export default function SecureAuthExample() {
   })
   const [errors, setErrors] = useState({})
   const [success, setSuccess] = useState(false)
-  const { makeRequest, loading, error } = useSecureRequest()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+
+  // Simplified API request function for demo
+  const makeRequest = async (endpoint, options) => {
+    setLoading(true)
+    setError(null)
+    
+    // Simulate API call
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        setLoading(false)
+        // Simulate successful authentication
+        resolve({ success: true, token: 'demo-token' })
+      }, 1000)
+    })
+  }
 
   /**
    * Validate form data
@@ -141,7 +192,7 @@ export default function SecureAuthExample() {
     }
 
     try {
-      // Make secure API request
+      // Make secure API request (simulated)
       const endpoint = mode === 'login' ? '/api/auth/login' : '/api/auth/register'
       const response = await makeRequest(endpoint, {
         method: 'POST',
@@ -159,12 +210,11 @@ export default function SecureAuthExample() {
 
       // Handle successful authentication
       if (response.token) {
-        // Token is automatically stored by the API client
         console.log('Authentication successful')
       }
     } catch (err) {
-      const handledError = handleClientError(err)
-      console.error('Authentication failed:', handledError)
+      setError('Authentication failed. Please try again.')
+      console.error('Authentication failed:', err)
     }
   }
 

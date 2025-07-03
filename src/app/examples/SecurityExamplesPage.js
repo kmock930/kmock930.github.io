@@ -32,7 +32,7 @@ import {
   Shield,
   Lock,
   VerifiedUser,
-  HttpsIcon,
+  Https,
   BugReport,
   Code,
   CheckCircle
@@ -64,7 +64,7 @@ export default function SecurityExamplesPage() {
 
   const securityFeatures = [
     {
-      icon: <HttpsIcon />,
+      icon: <Https />,
       title: 'HTTPS Implementation',
       description: 'Force HTTPS in production with security headers'
     },
