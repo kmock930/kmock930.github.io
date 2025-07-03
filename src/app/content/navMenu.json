@@ -14,5 +14,12 @@
             {"Life in Canada": ["Work", "Social", "Living"]}
         ]
     },
+    {
+        "Security": [
+            "Documentation",
+            "Examples",
+            "Best Practices"
+        ]
+    },
     "Contact Me"
 ]
