@@ -3,38 +3,6 @@ My Personal Website: [kmock930-github-io.vercel.app](https://kmock930-github-io.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## 🔐 Security Features
-
-This project includes a comprehensive secure communication layer with:
-
-- **HTTPS Implementation**: Force HTTPS in production with security headers
-- **Input Validation & Sanitization**: Comprehensive client and server-side validation
-- **API Security**: Secure API client with authentication and rate limiting
-- **Error Handling**: Secure error responses without information leakage
-- **XSS Prevention**: Input sanitization and output encoding
-- **CSRF Protection**: Request validation and token management
-- **Authentication**: JWT-based authentication with token refresh
-
-### Security Documentation
-
-- 📖 [Complete Security Guide](./docs/SECURITY.md) - Comprehensive security documentation
-- 🔧 [Security Utilities](./src/lib/) - Reusable security utilities
-- 📋 [Example Components](./src/app/examples/) - Secure component implementations
-- 🧪 [Security Tests](./tests/security.test.js) - Comprehensive security testing
-
-### Quick Security Setup
-
-```bash
-# Install dependencies
-npm install
-
-# Run security tests
-npm test -- security.test.js
-
-# Check for vulnerabilities
-npm audit
-```
-
 ## Getting Started
 
 First, run the development server:
